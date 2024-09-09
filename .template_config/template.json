@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Madoowl",
+  "classifications": [
+    "Clean Architecture",
+    "Clean",
+    "Minimal API",
+    "Minimal",
+    "API",
+    "Dotnet",
+    "Docker"
+  ],
+  "identity": "CatalogApi.Template",
+  "name": "Clean Minimal API Template",
+  "shortName": "catalogapi",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "CatalogApi",
+  "preferNameDirectory": true,
+  "symbols": {
+    "author": {
+      "type": "parameter",
+      "displayName": "The name of the author of the solution.",
+      "defaultValue": "Madoowl",
+      "replaces": "Madoowl"
+    }
+  }
+}
