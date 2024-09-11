@@ -1,9 +1,15 @@
 namespace CatalogApi.Infrastructure.Databases.Catalog;
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
+using CatalogApi.Application.Localisation;
 using CatalogApi.Infrastructure.Databases.Catalog.Extensions;
+using ApplicationCity = Application.Localisation.Entities.City;
+using ApplicationRegion = Application.Localisation.Entities.Region;
 
-internal class EntityFrameworkCatalogRepository
+internal class EntityFrameworkCatalogRepository : ILocalisationRepository
 {
 
     private readonly CatalogDbContext context;
@@ -25,16 +31,25 @@ internal class EntityFrameworkCatalogRepository
             _ = this.context.Database.EnsureCreated();
             _ = this.context.AddData();
         }
-
-        #region Regions
-
-        #endregion
-
-        #region Cities
-        #endregion
-
-        #region Restaurants
-        #endregion
-
     }
+
+    #region Regions
+    public virtual async Task<List<ApplicationRegion>> GetRegions(CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
+
+    #region Cities
+    public virtual async Task<List<ApplicationCity>> GetCities(CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
+
+    #region Restaurants
+    #endregion
+
 }
