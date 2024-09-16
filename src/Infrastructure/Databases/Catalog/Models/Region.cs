@@ -8,4 +8,5 @@ internal record Region : Entity
     public string Name { get; set; }
     public string Country { get; set; }
 
+    public ICollection<City> Cities { get; init; }
 }

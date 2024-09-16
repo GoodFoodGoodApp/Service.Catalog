@@ -11,4 +11,6 @@ internal record City : Entity
     // Foreign keys
 
     public Guid RegionId { get; set; }
+
+    public Region Region { get; init; }
 }
