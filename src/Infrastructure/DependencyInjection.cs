@@ -4,7 +4,8 @@ using System;
 using Application.Authors;
 using Application.Movies;
 using Application.Reviews;
-using CatalogApi.Infrastructure.Databases.Catalog;
+using Application.Localisation;
+using Databases.Catalog;
 using Databases.MoviesReviews;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +37,10 @@ public static class DependencyInjection
 
         _ = services.AddDbContext<CatalogDbContext>(options =>
                    options.UseInMemoryDatabase($"Catalog-{Guid.NewGuid()}"), ServiceLifetime.Singleton);
+        _ = services.AddSingleton<EntityFrameworkCatalogRepository>();
+        _ = services.AddSingleton<ILocalisationRepository>(p =>
+                   p.GetRequiredService<EntityFrameworkCatalogRepository>());
+
         return services;
     }
 }

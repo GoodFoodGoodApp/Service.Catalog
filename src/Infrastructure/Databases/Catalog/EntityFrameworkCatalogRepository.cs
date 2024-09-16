@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CatalogApi.Application.Localisation;
 using CatalogApi.Infrastructure.Databases.Catalog.Extensions;
+using Microsoft.EntityFrameworkCore;
 using ApplicationCity = Application.Localisation.Entities.City;
 using ApplicationRegion = Application.Localisation.Entities.Region;
 
@@ -36,7 +37,11 @@ internal class EntityFrameworkCatalogRepository : ILocalisationRepository
     #region Regions
     public virtual async Task<List<ApplicationRegion>> GetRegions(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var results = await this.context.Regions
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return this.mapper.Map<List<ApplicationRegion>>(results);
     }
 
     #endregion
@@ -44,7 +49,11 @@ internal class EntityFrameworkCatalogRepository : ILocalisationRepository
     #region Cities
     public virtual async Task<List<ApplicationCity>> GetCities(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var results = await this.context.Cities
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return this.mapper.Map<List<ApplicationCity>>(results);
     }
 
     #endregion
