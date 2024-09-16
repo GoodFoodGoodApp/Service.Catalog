@@ -29,9 +29,4 @@
     </AssemblyAttribute>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Databases\Catalog\Configuration\" />
-    <Folder Include="Databases\Catalog\Mapping\" />
-  </ItemGroup>
-
 </Project>
