@@ -54,6 +54,7 @@ public static class WebApplicationBuilderExtensions
         var ti = CultureInfo.CurrentCulture.TextInfo;
 
         _ = builder.Services.AddEndpointsApiExplorer();
+        //TODO change infos to use .NET8 and change naming
         _ = builder.Services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1",
@@ -75,7 +76,7 @@ public static class WebApplicationBuilderExtensions
                     },
                     TermsOfService = new Uri("https://github.com/stphnwlsh/catalogapi")
                 });
-
+            //TODO review links
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));

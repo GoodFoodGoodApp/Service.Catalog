@@ -20,6 +20,7 @@ internal static class CatalogDbContextExtensions
     public static CatalogDbContext AddData(this CatalogDbContext context)
     {
         var regions = new Faker<Region>()
+            .RuleFor(r => r.Id, f => Guid.NewGuid())
             .RuleFor(r => r.Name, f => f.Address.County())
             .RuleFor(r => r.Country, f => f.Address.Country())
             .Generate(5);
@@ -27,6 +28,7 @@ internal static class CatalogDbContextExtensions
         context.AddRange(regions);
 
         var cities = new Faker<City>()
+            .RuleFor(c => c.Id, f => Guid.NewGuid())
             .RuleFor(c => c.Name, f => f.Address.City())
             .RuleFor(c => c.PostalCode, f => f.Address.ZipCode())
             .RuleFor(c => c.RegionId, f => f.PickRandom(regions).Id)
@@ -34,16 +36,16 @@ internal static class CatalogDbContextExtensions
 
         context.AddRange(cities);
 
-        var restaurants = new Faker<Restaurant>()
-            .RuleFor(r => r.Name, f => f.Company.CompanyName())
-            .RuleFor(r => r.Description, f => f.Lorem.Sentence())
-            .RuleFor(r => r.Address, f => f.Address.FullAddress())
-            .RuleFor(r => r.Email, f => f.Internet.Email())
-            .RuleFor(r => r.Phone, f => f.Phone.PhoneNumber())
-            .RuleFor(r => r.CityId, f => f.PickRandom(cities).Id)
-            .Generate(15);
+        //var restaurants = new Faker<Restaurant>()
+        //    .RuleFor(r => r.Name, f => f.Company.CompanyName())
+        //    .RuleFor(r => r.Description, f => f.Lorem.Sentence())
+        //    .RuleFor(r => r.Address, f => f.Address.FullAddress())
+        //    .RuleFor(r => r.Email, f => f.Internet.Email())
+        //    .RuleFor(r => r.Phone, f => f.Phone.PhoneNumber())
+        //    .RuleFor(r => r.CityId, f => f.PickRandom(cities).Id)
+        //    .Generate(15);
 
-        context.AddRange(restaurants);
+        //context.AddRange(restaurants);
 
         //Save and return the context
 

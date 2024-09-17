@@ -42,11 +42,12 @@ public static class WebApplicationExtensions
         #endregion Swagger
 
         #region MinimalApi
-
+        //TODO add endpoint here
         _ = app.MapVersionEndpoints();
         _ = app.MapAuthorEndpoints();
         _ = app.MapMovieEndpoints();
         _ = app.MapReviewEndpoints();
+        _ = app.MapLocalisationsEndpoints();
 
         #endregion MinimalApi
 

@@ -50,6 +50,7 @@ internal class EntityFrameworkCatalogRepository : ILocalisationRepository
     public virtual async Task<List<ApplicationCity>> GetCities(CancellationToken cancellationToken)
     {
         var results = await this.context.Cities
+            .Include(c => c.Region)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
