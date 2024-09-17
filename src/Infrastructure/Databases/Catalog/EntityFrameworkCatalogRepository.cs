@@ -5,12 +5,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CatalogApi.Application.Localisation;
+using CatalogApi.Application.Restaurants;
 using CatalogApi.Infrastructure.Databases.Catalog.Extensions;
 using Microsoft.EntityFrameworkCore;
 using ApplicationCity = Application.Localisation.Entities.City;
 using ApplicationRegion = Application.Localisation.Entities.Region;
+using ApplicationRestaurant = Application.Restaurants.Entities.Restaurant;
 
-internal class EntityFrameworkCatalogRepository : ILocalisationRepository
+internal class EntityFrameworkCatalogRepository : ILocalisationRepository, IRestaurantRepository
 {
 
     private readonly CatalogDbContext context;
@@ -57,9 +59,23 @@ internal class EntityFrameworkCatalogRepository : ILocalisationRepository
         return this.mapper.Map<List<ApplicationCity>>(results);
     }
 
+
     #endregion
 
     #region Restaurants
+
+    public virtual async Task<List<ApplicationRestaurant>> GetRestaurants(CancellationToken cancellationToken)
+    {
+        var results = await this.context.Restaurants
+            .Include(r => r.City)
+            .Include(r => r.City.Region)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return this.mapper.Map<List<ApplicationRestaurant>>(results);
+
+    }
+
     #endregion
 
 }

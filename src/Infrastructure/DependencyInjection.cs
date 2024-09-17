@@ -9,6 +9,7 @@ using Databases.Catalog;
 using Databases.MoviesReviews;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Application.Restaurants;
 
 public static class DependencyInjection
 {
@@ -40,6 +41,9 @@ public static class DependencyInjection
         _ = services.AddSingleton<EntityFrameworkCatalogRepository>();
         _ = services.AddSingleton<ILocalisationRepository>(p =>
                    p.GetRequiredService<EntityFrameworkCatalogRepository>());
+
+        _ = services.AddSingleton<IRestaurantRepository>(p =>
+                          p.GetRequiredService<EntityFrameworkCatalogRepository>());
 
         return services;
     }

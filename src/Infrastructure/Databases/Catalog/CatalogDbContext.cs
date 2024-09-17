@@ -10,7 +10,7 @@ internal class CatalogDbContext(DbContextOptions<CatalogDbContext> options) : Db
 
     public DbSet<Region> Regions { get; set; }
     public DbSet<City> Cities { get; set; }
-    //public DbSet<Restaurant> Restaurants { get; set; }
+    public DbSet<Restaurant> Restaurants { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

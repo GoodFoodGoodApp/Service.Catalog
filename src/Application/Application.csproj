@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Restaurants\" />
+    <Folder Include="Restaurants\Queries\GetRestaurant\" />
   </ItemGroup>
 
 </Project>

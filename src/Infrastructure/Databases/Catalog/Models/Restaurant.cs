@@ -1,5 +1,6 @@
 namespace CatalogApi.Infrastructure.Databases.Catalog.Models;
 
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
 [ExcludeFromCodeCoverage]
@@ -13,8 +14,10 @@ internal record Restaurant : Entity
 
     // Add gps location
 
-    // Keys
-
+    // Foreign keys
+    [ForeignKey("City")]
     public Guid CityId { get; set; }
+
+    public City City { get; init; }
 
 }
