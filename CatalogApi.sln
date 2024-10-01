@@ -17,7 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F76F0E9E-98D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{D79C9477-FC71-4927-BDB1-46982F6EB423}"
 	ProjectSection(SolutionItems) = preProject
-		build\Dockerfile = build\Dockerfile
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9DBFD6CA-EFB8-43C7-9BAB-E318EE6F134B}"
@@ -34,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Tests.Unit", "t
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Tests.Integration", "tests\Presentation.Tests.Integration\Presentation.Tests.Integration.csproj", "{DB7F98AB-3D02-4652-80BC-681A00168ECC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Tests.Unit", "tests\Presentation.Tests.Unit\Presentation.Tests.Unit.csproj", "{77B504BC-C261-4998-9B09-E2BD1A477AB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Tests.Unit", "tests\Presentation.Tests.Unit\Presentation.Tests.Unit.csproj", "{77B504BC-C261-4998-9B09-E2BD1A477AB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
