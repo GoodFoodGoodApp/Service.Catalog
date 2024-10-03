@@ -49,6 +49,8 @@ public static class WebApplicationExtensions
         _ = app.MapReviewEndpoints();
         _ = app.MapLocalisationsEndpoints();
         _ = app.MapRestaurantsEndpoints();
+        _ = app.MapMenusEndpoints();
+        _ = app.MapArtefactEndpoints();
 
         #endregion MinimalApi
 
