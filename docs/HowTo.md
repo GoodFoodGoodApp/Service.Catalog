@@ -53,4 +53,10 @@ Au lancement de swagger, le nouvel endpoint doit être visible et opérationnel.
 
 ## Couche Application
 
+La couche application porte les services, les règles métiers, les aggrégations etc. Ici elle fonctionne à partir de la définition des objets __Entity__ et implémente le pattern __CQRS__. Elle porte l'interface qui va permettre de communiquer avec la couche Infrastructure via le repository __IArtefactRepository__.
+
+1. Créer un nouveau dossier qui porte le nom de l'objet métier / du domaine ```Artefact``` dans le dossier ```.\src\Application\Artefact\```
+2. Créer les dossiers ```Entities``` ```Commands``` et ```Queries``` dans le dossier ```.\src\Application\Artefact\```
+3. Créer l'interface ```IArtefactRepository``` dans le dossier ```.\src\Application\Artefact\```
+
 ## Couche Infrastructure
