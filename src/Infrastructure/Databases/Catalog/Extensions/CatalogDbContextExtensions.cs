@@ -47,6 +47,16 @@ internal static class CatalogDbContextExtensions
 
         context.AddRange(restaurants);
 
+        var menus = new Faker<Menu>()
+            .RuleFor(m => m.Id, f => Guid.NewGuid())
+            .RuleFor(m => m.Name, f => f.Commerce.ProductName())
+            .RuleFor(m => m.Description, f => f.Lorem.Sentence())
+            .RuleFor(m => m.Price, f => f.Finance.Amount(10, 50))
+            .RuleFor(m => m.Picture, f => f.Image.PicsumUrl())
+            .Generate(50);
+
+        context.AddRange(menus);
+
         //Save and return the context
 
         _ = context.SaveChanges();

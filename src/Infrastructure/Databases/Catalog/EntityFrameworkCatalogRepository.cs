@@ -5,6 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CatalogApi.Application.Localisation;
+using CatalogApi.Application.Menus;
+using CatalogApi.Application.Menus.Entities;
 using CatalogApi.Application.Restaurants;
 using CatalogApi.Infrastructure.Databases.Catalog.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +14,7 @@ using ApplicationCity = Application.Localisation.Entities.City;
 using ApplicationRegion = Application.Localisation.Entities.Region;
 using ApplicationRestaurant = Application.Restaurants.Entities.Restaurant;
 
-internal class EntityFrameworkCatalogRepository : ILocalisationRepository, IRestaurantRepository
+internal class EntityFrameworkCatalogRepository : ILocalisationRepository, IRestaurantRepository, IMenusRepository
 {
 
     private readonly CatalogDbContext context;
@@ -76,6 +78,28 @@ internal class EntityFrameworkCatalogRepository : ILocalisationRepository, IRest
 
     }
 
+
     #endregion
 
+    #region Menus
+    public async Task<List<Menu>> GetMenus(CancellationToken cancellationToken)
+    {
+        var results = await this.context.Menus
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return this.mapper.Map<List<Menu>>(results);
+    }
+
+    public Task<Menu> GetMenu(Guid restaurant_id, CancellationToken cancellationToken)
+    {
+        //TODO add include to resturant in menu's model
+        //var result = this.context.Menus
+        //    .AsNoTracking()
+        //    .FirstOrDefaultAsync(m => m.RestaurantId == restaurant_id, cancellationToken);
+
+        throw new NotImplementedException();
+    }
+
+    #endregion
 }

@@ -61,7 +61,91 @@ Au lancement de swagger, la route et son endpoint doivent être visibles et opé
 La couche application porte les services, les règles métiers, les aggrégations etc. Ici elle fonctionne à partir de la définition des objets __Entity__ et implémente le pattern __CQRS__. Elle porte l'interface qui va permettre de communiquer avec la couche Infrastructure via le repository __IArtefactRepository__.
 
 1. Créer un nouveau dossier qui porte le nom de l'objet métier / du domaine ```Artefact``` dans le dossier ```.\src\Application\Artefact\```
+
 2. Créer les dossiers ```Entities``` ```Commands``` et ```Queries``` dans le dossier ```.\src\Application\Artefact\```
+
 3. Créer l'interface ```IArtefactRepository``` dans le dossier ```.\src\Application\Artefact\```
 
+4. Dans l'interface créer les premières fonctions tel que {#IRepository}    
+  ```csharp
+  public IArtefactsRepository
+  {
+  //Récupère un artefact par son id
+    Task<Artefact> GetArtefact(Guid id, CancellationToken cancellationToken);
+
+    //Récupère une liste de tous les artefacts
+    Task<List<Artefact>> GetArtefacts( CancellationToken cancellationToken);
+  }
+  ```
+
 ## Couche Infrastructure
+ 
+ La couche infrastructure porte les services qui permettent de communiquer avec les bases de données, les fichiers, les services externes etc. Elle implémente les interfaces de la couche Application.
+
+ 1. Créer le modèle (Plain Object)
+
+Créer le modèle ```Artefact.cs``` dans le dossier ```.\src\Infrastructure\Databases\Catalog\Models\```
+ Le modèle est un _record_ de portée _internal_ qui hérite de _Entity_.
+ ```csharp
+ [ExcludeFromCodeCoverage]
+internal record Menu : Entity
+{
+// ajout des propriétés
+}
+ 
+ ```
+   2. Déclarer ce modèle comme table dans le DBContext
+
+   ```csharp
+   public DbSet<Artefact> Artefacts { get; set; }
+   ```
+
+3. Implémenter l'interface dans la classe repository
+
+Dans la classe ```.\src\Infrastructure\Databases\Catalog\EntityFrameworkCatalogRepository.cs```, le constructeur doit implémenter le repository ```IArtefactRepository```.
+
+Les fonctions de l'interface doivent être implémentées dans ```IArtefactRepository```  :
+
+```csharp
+public async Task<List<Artefact>> GetArtefacts( CancellationToken cancellationToken)
+{
+    throw new NotImplementedException();
+}
+```
+
+4. Configurer automapper pour ce modèle
+
+Dans le dossier ```.\src\Infrastructure\Databases\Catalog\Mapping\``` créer une _internal class_ ```ArtefactMappingProfile``` héritant de _AutoMapper.Profile_. Cette classe aura la charge d'interpréter les objets entre les couches Application et Infrastructure.
+
+!!! Pour faciliter le mapping puisque les classes portent des noms similaires importer les namespace des classes sous ce format :
+```csharp
+using Application = Application.Artfefacts.Entities;
+using Infrastructure = Models;
+```
+
+
+  5. Ajouter le service dans le container de DI
+
+  ```csharp 
+  
+        _ = services.AddSingleton<IArtefactsRepository>(p =>
+                                 p.GetRequiredService<EntityFrameworkCatalogRepository>());
+  ```
+
+
+
+### Data faker
+
+Pour tester les données via une bdd _in memory_ , il est possible de créer des données fictives via la librairie _Bogus_.
+
+Dans la classe ```.\src\Infrastructure\Databases\Catalog\Extensions\CatalogDbContextExtensions.cs``` dans la méthode ```AddData``` :
+
+```csharp
+var artefacts = new Faker<Artefact>()
+    .RuleFor(x => x.Id, f => f.Random.Guid())
+    .RuleFor(x => x.Name, f => f.Random.String2(10))
+    .Generate(10);
+
+context.AddRange(artefacts);
+
+```

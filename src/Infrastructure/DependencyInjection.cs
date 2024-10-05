@@ -10,6 +10,7 @@ using Databases.MoviesReviews;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Application.Restaurants;
+using CatalogApi.Application.Menus;
 
 public static class DependencyInjection
 {
@@ -44,6 +45,9 @@ public static class DependencyInjection
 
         _ = services.AddSingleton<IRestaurantRepository>(p =>
                           p.GetRequiredService<EntityFrameworkCatalogRepository>());
+
+        _ = services.AddSingleton<IMenusRepository>(p =>
+                                 p.GetRequiredService<EntityFrameworkCatalogRepository>());
 
         return services;
     }

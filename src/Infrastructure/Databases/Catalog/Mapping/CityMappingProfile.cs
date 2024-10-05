@@ -1,4 +1,4 @@
-﻿namespace CatalogApi.Infrastructure.Databases.Catalog.Mapping;
+namespace CatalogApi.Infrastructure.Databases.Catalog.Mapping;
 
 using AutoMapper;
 using Application = Application.Localisation.Entities;
@@ -15,4 +15,3 @@ internal class CityMappingProfile : Profile {
             .ReverseMap();
     }
 }
-
