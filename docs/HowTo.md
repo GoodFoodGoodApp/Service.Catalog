@@ -3,13 +3,15 @@
 
 ## Couche Présentation
 
-1. Créer un nouvel endpoint
+1. Créer une nouvelle route
 
-Couche qui porte les endpoints de l'API REST via les classes ```ArtefactEndPoints.cs``` dans le dossier ```.\src\Presentation\Endpoints\``` .
+_Une route est ici intitulée Endpoints_ En général , une route est un chemin qui permet de définir un __ensemble de ressources__. Un endpoint est une __ressource accessible__ via une URL et une méthode HTTP.
+
+La couche présentation porte les endpoints de l'API REST via les classes ```ArtefactEndPoints.cs``` dans le dossier ```.\src\Presentation\Endpoints\``` .
   
-Créer la nouvelle classe ```ArtefactEndpoints.cs``` et récupérer le contenu d'un endpoint similaire.
+Créer la nouvelle classe ```ArtefactEndpoints.cs``` et récupérer le contenu d'une ressource similaire.
 
-Configurer le constructeur  ```MapArtefactEndpoints``` de la classe pour définir le endpoint : 
+Configurer le constructeur  ```MapArtefactEndpoints``` de la classe pour définir la route : 
 ```csharp
 var root = app.MapGroup("/api/Artefact")
             .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
@@ -17,6 +19,9 @@ var root = app.MapGroup("/api/Artefact")
             .WithDescription("artefact")
             .WithOpenApi();
 ```
+
+2. Créer un nouvel endpoint GET
+
 Dans un premier temps créer un endpoint en __GET__, avec un retour de type string tel que :
 
 ````csharp
@@ -49,7 +54,7 @@ Dans le fichier ```.\src\Presentation\Extensions\WebApplicationExtensions.cs``` 
   _ = app.MapArtefactEndpoints();
 ``` 
 
-Au lancement de swagger, le nouvel endpoint doit être visible et opérationnel.
+Au lancement de swagger, la route et son endpoint doivent être visibles et opérationnels.
 
 ## Couche Application
 
