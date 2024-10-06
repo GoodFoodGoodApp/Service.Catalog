@@ -10,6 +10,7 @@ internal abstract record Entity
     public DateTime DateCreated { get; init; }
 
     public DateTime DateModified { get; set; }
+
     public bool IsActive { get; set; }
 
 }
