@@ -43,7 +43,7 @@ internal static class CatalogDbContextExtensions
             .RuleFor(r => r.Email, f => f.Internet.Email())
             .RuleFor(r => r.Phone, f => f.Phone.PhoneNumber())
             .RuleFor(r => r.CityId, f => f.PickRandom(cities).Id)
-            .Generate(15);
+            .Generate(3);
 
         context.AddRange(restaurants);
 
@@ -53,9 +53,24 @@ internal static class CatalogDbContextExtensions
             .RuleFor(m => m.Description, f => f.Lorem.Sentence())
             .RuleFor(m => m.Price, f => f.Finance.Amount(10, 50))
             .RuleFor(m => m.Picture, f => f.Image.PicsumUrl())
-            .Generate(50);
+            .Generate(9);
 
         context.AddRange(menus);
+
+        var menuInventoriesGeneration = new Faker<MenuRestaurant>()
+            .RuleFor(mi => mi.Id, f => Guid.NewGuid())
+            .RuleFor(mi => mi.MenuId, f => f.PickRandom(menus).Id)
+            .RuleFor(mi => mi.RestaurantId, f => f.PickRandom(restaurants).Id)
+            .RuleFor(mi => mi.Quantity, f => f.Random.Number(10, 50))
+            .Generate(27);
+
+// ensure there is no doublon in the menuInventoriesGeneration
+        var menuInventories = menuInventoriesGeneration
+            .GroupBy(mi => new { mi.MenuId, mi.RestaurantId })
+            .Select(g => g.First())
+            .ToList();
+
+        context.AddRange(menuInventories);
 
         //Save and return the context
 

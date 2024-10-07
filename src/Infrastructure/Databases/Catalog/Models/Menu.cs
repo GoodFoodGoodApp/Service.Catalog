@@ -12,4 +12,6 @@ internal record Menu : Entity
     public string Picture { get; set; }
 
     public decimal Price { get; set; }
+
+    public virtual ICollection<MenuRestaurant> MenuRestaurants { get; set; }
 }

@@ -13,6 +13,9 @@ internal class CatalogDbContext(DbContextOptions<CatalogDbContext> options) : Db
     public DbSet<Restaurant> Restaurants { get; set; }
     public DbSet<Menu> Menus { get; set; }
 
+    public DbSet<MenuRestaurant> MenuInventories { get; set; }
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

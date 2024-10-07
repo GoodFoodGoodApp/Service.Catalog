@@ -11,12 +11,6 @@ public class GetMenusByRestaurantHandler(IMenusRepository repository) : IRequest
 {
     public async Task<List<Menu>> Handle(GetMenusByRestaurantQuery request, CancellationToken cancellationToken)
     {
-        // Implement the logic to retrieve menus by restaurant using the _menuRepository
-        // Example:
-        // var menus = await _menuRepository.GetMenusByRestaurant(request.RestaurantId);
-        // return menus;
-
-        // Placeholder return statement
-        return new List<Menu>();
+        return await repository.GetMenusByRestaurant(request.RestaurantId, cancellationToken);
     }
 }

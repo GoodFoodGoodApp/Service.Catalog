@@ -91,14 +91,25 @@ internal class EntityFrameworkCatalogRepository : ILocalisationRepository, IRest
         return this.mapper.Map<List<Menu>>(results);
     }
 
-    public Task<Menu> GetMenu(Guid restaurant_id, CancellationToken cancellationToken)
+    public async Task<Menu> GetMenu(Guid menu_id, CancellationToken cancellationToken)
     {
-        //TODO add include to resturant in menu's model
-        //var result = this.context.Menus
-        //    .AsNoTracking()
-        //    .FirstOrDefaultAsync(m => m.RestaurantId == restaurant_id, cancellationToken);
+        var results = await this.context.Menus
+             .AsNoTracking()
+             .FirstOrDefaultAsync(m => m.Id == menu_id, cancellationToken);
 
-        throw new NotImplementedException();
+        return this.mapper.Map<Menu>(results);
+    }
+
+    public async Task<List<Menu>> GetMenusByRestaurant(Guid restaurant_id, CancellationToken cancellationToken)
+    {
+
+        var results = await this.context.Restaurants
+            .Where(r => r.Id == restaurant_id)
+            .SelectMany(r => r.MenuRestaurants)
+            .Select(mr => mr.Menu)
+            .ToListAsync(cancellationToken);
+
+        return this.mapper.Map<List<Menu>>(results);
     }
 
     #endregion

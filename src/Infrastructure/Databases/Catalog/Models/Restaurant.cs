@@ -20,4 +20,5 @@ internal record Restaurant : Entity
 
     public City City { get; init; }
 
+    public virtual ICollection<MenuRestaurant> MenuRestaurants { get; set; }
 }

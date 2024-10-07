@@ -1,4 +1,4 @@
-﻿namespace CatalogApi.Infrastructure.Databases.Catalog.Configuration;
+namespace CatalogApi.Infrastructure.Databases.Catalog.Configuration;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Models;
 
