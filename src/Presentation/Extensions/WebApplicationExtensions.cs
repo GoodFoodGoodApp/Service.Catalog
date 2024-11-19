@@ -20,6 +20,7 @@ public static class WebApplicationExtensions
         #region Security
 
         _ = app.UseHsts();
+        _ = app.UseCors("AllowAll");
 
         #endregion Security
 

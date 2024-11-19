@@ -36,6 +36,17 @@ public static class WebApplicationBuilderExtensions
 
         #endregion Logging
 
+        #region Configurations CORS
+        _ = builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll",
+                builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+        });
+        #endregion Configurations CORS
+
         #region Serialisation
 
         _ = builder.Services.Configure<JsonOptions>(opt =>
